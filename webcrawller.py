@@ -180,8 +180,6 @@ def extract():
         cards = driver.find_elements(By.CSS_SELECTOR, "div.nb__2_XSE")
         current_count = len(cards)
 
-        print("Loaded cards:", current_count)
-
         # Stop if no new cards loaded
         if current_count == last_count:
             print("Reached end of results.")
@@ -189,10 +187,9 @@ def extract():
 
         last_count = current_count
     cards = driver.find_elements(By.CSS_SELECTOR, "div.nb__2_XSE")
-    print(len(cards))
+    print("Loaded cards:", current_count)
     for i in range(len(cards)):
         try:
-            print(i);
             address_el= cards[i].find_element(By.XPATH,".//*[contains(@class,'overflow-ellipsis') and contains(@class,'whitespace-nowrap')]")
             address = address_el.text.strip()
             price_el = cards[i].find_element(By.XPATH,".//div[contains(@class,'flex-col') and contains(@class,'items-center') and contains(@class,'w-33pe')]")
@@ -225,4 +222,5 @@ add_localities(localities)
 search()
 extract()
 time.sleep(2) 
+
 
